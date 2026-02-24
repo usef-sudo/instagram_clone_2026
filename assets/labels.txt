@@ -1,0 +1,2 @@
+0 face detected
+1 animal face or no face detected
