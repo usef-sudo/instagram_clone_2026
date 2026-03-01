@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/pages/login_screen.dart';
+import 'package:instagram_clone/presentation/pages/login_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -45,7 +45,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Account created successfully ✅")),
         );
-       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
+     //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
       }
     } on FirebaseAuthException catch (e) {
       _showError(_mapFirebaseError(e.code));

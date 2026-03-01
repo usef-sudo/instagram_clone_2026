@@ -50,6 +50,8 @@ dependencies:
   webview_flutter: ^4.13.1
   tflite_flutter: ^0.12.1
   image: ^4.8.0
+  easy_localization: ^3.0.8
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +79,7 @@ flutter:
   assets:
      - assets/icons/me.jpeg
      - assets/
+     - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

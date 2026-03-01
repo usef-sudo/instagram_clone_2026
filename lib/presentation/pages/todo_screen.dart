@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/pages/login_screen.dart';
+import 'package:instagram_clone/presentation/pages/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TodoScreen extends StatefulWidget {
@@ -36,8 +36,8 @@ class _TodoScreenState extends State<TodoScreen> {
                 prefs.clear();
                 prefs.remove("userUid");
 
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               icon: Icon(Icons.logout))
         ],

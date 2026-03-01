@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/pages/create_account_screen.dart';
-import 'package:instagram_clone/pages/home_screen.dart';
-import 'package:instagram_clone/pages/todo_screen.dart';
+import 'package:instagram_clone/presentation/pages/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  SplashScreen({required this.onToggle, super.key});
+
+  final VoidCallback onToggle;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -33,15 +33,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateToLogin() async {
-    SharedPreferences prefs =
-       await SharedPreferences.getInstance() ;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String userUid = prefs.getString("userUid") ?? "";
 
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => userUid == "" ? LoginScreen() : HomeScreen(userUid)),
+          builder: (context) => userUid == ""
+              ? LoginScreen(
+                  onToggle: widget.onToggle,
+                )
+              : HomeScreen(userUid)),
     );
   }
 }

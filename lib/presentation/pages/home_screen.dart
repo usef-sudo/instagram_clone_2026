@@ -54,9 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.clear();
                 prefs.remove("userUid");
-
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                //
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               icon: Icon(Icons.logout))
         ],
