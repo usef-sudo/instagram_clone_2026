@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/presentation/pages/splash_screen.dart';
+import 'package:instagram_clone/providers/theme_cubit.dart';
 import 'package:instagram_clone/providers/theme_provider.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -21,11 +23,15 @@ Future<void> main() async {
             'assets/translations', // <-- change the path of the translation files
         fallbackLocale: Locale('en'),
         saveLocale: true,
-        child: ChangeNotifierProvider(
-            create: (BuildContext context) {
-              return ThemeProvider();
-            },
-            child: MyApp())),
+        child:
+            // for provider
+            // ChangeNotifierProvider(
+            //     create: (BuildContext context) {
+            //       return ThemeProvider();
+            //     },
+            //     child: MyApp())
+            // for cubit
+            BlocProvider(create: (_) => ThemeCubit(), child: MyApp())),
   );
 }
 
@@ -41,7 +47,28 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
+    return
+
+        //  in provider
+        //   Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
+        //   return MaterialApp(
+        //       localizationsDelegates: context.localizationDelegates,
+        //       supportedLocales: context.supportedLocales,
+        //       locale: context.locale,
+        //       debugShowCheckedModeBanner: false,
+        //       home: SplashScreen(onToggle: () {
+        //         print('Toggle theme from light to dark');
+        //         setState(() {
+        //           isdark = !isdark;
+        //         });
+        //       }),
+        //       themeMode: themeProvider.themeMode,
+        //       theme: ThemeData.light(),
+        //       darkTheme: ThemeData.dark());
+        // });
+
+// in cubit
+        BlocBuilder<ThemeCubit, bool>(builder: (context, isDark) {
       return MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -53,7 +80,7 @@ class _MyAppState extends State<MyApp> {
               isdark = !isdark;
             });
           }),
-          themeMode: themeProvider.themeMode,
+          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark());
     });

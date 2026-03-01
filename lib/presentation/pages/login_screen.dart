@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/main.dart';
+import 'package:instagram_clone/providers/theme_cubit.dart';
 import 'package:instagram_clone/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
           title: Text("login_screen").tr(),
@@ -142,7 +143,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: themeProvider.toggleTheme,
+                  onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+
+                  //themeProvider.toggleTheme,
                   child: Text("Toogle_Theme").tr()),
             ),
             SizedBox(
