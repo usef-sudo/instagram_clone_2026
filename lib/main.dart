@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/presentation/pages/new_todo_page.dart';
 import 'package:instagram_clone/presentation/pages/splash_screen.dart';
+import 'package:instagram_clone/presentation/pages/todo_screen.dart';
 import 'package:instagram_clone/providers/theme_cubit.dart';
 import 'package:instagram_clone/providers/theme_provider.dart';
+import 'package:instagram_clone/providers/todo_provider.dart';
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
@@ -16,23 +19,19 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(
-    EasyLocalization(
-        supportedLocales: [Locale('en'), Locale('ar')],
-        path:
-            'assets/translations', // <-- change the path of the translation files
-        fallbackLocale: Locale('en'),
-        saveLocale: true,
-        child:
-            // for provider
-            // ChangeNotifierProvider(
-            //     create: (BuildContext context) {
-            //       return ThemeProvider();
-            //     },
-            //     child: MyApp())
-            // for cubit
-            BlocProvider(create: (_) => ThemeCubit(), child: MyApp())),
-  );
+  runApp(EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path:
+          'assets/translations', // <-- change the path of the translation files
+      fallbackLocale: Locale('en'),
+      saveLocale: true,
+      child: MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => TodoProvider()..getData()),
+      ], child: MyApp())));
+  // for cubit
+  // BlocProvider(create: (_) => ThemeCubit(), child: MyApp())),
+  // );
 }
 
 class MyApp extends StatefulWidget {
@@ -49,41 +48,45 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return
 
-        //  in provider
-        //   Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
-        //   return MaterialApp(
-        //       localizationsDelegates: context.localizationDelegates,
-        //       supportedLocales: context.supportedLocales,
-        //       locale: context.locale,
-        //       debugShowCheckedModeBanner: false,
-        //       home: SplashScreen(onToggle: () {
-        //         print('Toggle theme from light to dark');
-        //         setState(() {
-        //           isdark = !isdark;
-        //         });
-        //       }),
-        //       themeMode: themeProvider.themeMode,
-        //       theme: ThemeData.light(),
-        //       darkTheme: ThemeData.dark());
-        // });
-
-// in cubit
-        BlocBuilder<ThemeCubit, bool>(builder: (context, isDark) {
+        //    in provider
+        Consumer<ThemeProvider>(builder: (context, themeProvider, _) {
       return MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(onToggle: () {
-            print('Toggle theme from light to dark');
-            setState(() {
-              isdark = !isdark;
-            });
-          }),
-          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+          home: NewTodoPage(),
+
+          // SplashScreen(onToggle: () {
+          //   print('Toggle theme from light to dark');
+          //   setState(() {
+          //     isdark = !isdark;
+          //   });
+          // }),
+          themeMode: themeProvider.themeMode,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark());
     });
+
+// in cubit
+//         BlocBuilder<ThemeCubit, bool>(builder: (context, isDark) {
+//       return MaterialApp(
+//           localizationsDelegates: context.localizationDelegates,
+//           supportedLocales: context.supportedLocales,
+//           locale: context.locale,
+//           debugShowCheckedModeBanner: false,
+//           home: NewTodoPage(),
+//
+//           // SplashScreen(onToggle: () {
+//           //   print('Toggle theme from light to dark');
+//           //   setState(() {
+//           //     isdark = !isdark;
+//           //   });
+//           // }),
+//           themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+//           theme: ThemeData.light(),
+//           darkTheme: ThemeData.dark());
+//     });
   }
 }
 
