@@ -19,7 +19,12 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
 
     final response =
-        await http.get(Uri.parse("http://jsonplaceholder.typicode.com/todos"));
+    await http.get(Uri.parse("http://jsonplaceholder.typicode.com/todos"));
+
+
+    if(response.statusCode!=200)
+      _error = response.body;
+
 
     final List data = jsonDecode(response.body);
 
