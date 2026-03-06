@@ -11,8 +11,7 @@ import 'forget_password_screen.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({required this.onToggle, super.key});
-  final VoidCallback onToggle;
+  LoginScreen({ super.key});
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

@@ -5,9 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({required this.onToggle, super.key});
+  SplashScreen({ super.key});
 
-  final VoidCallback onToggle;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -42,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
       MaterialPageRoute(
           builder: (context) => userUid == ""
               ? LoginScreen(
-                  onToggle: widget.onToggle,
+
                 )
               : HomeScreen(userUid)),
     );

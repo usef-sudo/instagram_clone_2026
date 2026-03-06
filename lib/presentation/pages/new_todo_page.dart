@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/providers/todo_cubit.dart';
-import 'package:instagram_clone/providers/todo_provider.dart';
 import 'package:instagram_clone/providers/todo_state.dart';
-import 'package:provider/provider.dart';
 
 class NewTodoPage extends StatelessWidget {
   NewTodoPage({super.key});
@@ -13,7 +11,13 @@ class NewTodoPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Todos"),
         ),
-        body: BlocBuilder<TodoCubit, TodoState>(builder: (context, todoState) {
+        body:
+
+
+
+        BlocBuilder<TodoCubit, TodoState>(
+
+            builder: (context, todoState) {
           if (todoState is TodoLoading) return CircularProgressIndicator();
           if (todoState is TodoError) return Text("Something went wrong");
           if (todoState is TodoEmpty) return Text("No todos");
@@ -24,7 +28,12 @@ class NewTodoPage extends StatelessWidget {
                   return ListTile(title: Text(todoState.todos[index].title));
                 });
           return SizedBox();
-        })
+        }
+
+
+
+
+        )
 
         // Consumer<TodoProvider>(builder: (context, todoProvider, _) {
         //   if (todoProvider.isLoading)
