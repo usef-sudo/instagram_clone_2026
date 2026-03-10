@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/presentation/pages/splash_screen.dart';
 import 'package:instagram_clone/providers/theme_cubit.dart';
 import 'package:instagram_clone/providers/todo_cubit.dart';
+import 'features/splash/pages/splash_page.dart' show SplashScreen;
 import 'firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -114,10 +114,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-
-  // Initialize FCM
-  await FCMService.init();
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  //
+  // // Initialize FCM
+  // await FCMService.init();
 
   runApp(EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],
