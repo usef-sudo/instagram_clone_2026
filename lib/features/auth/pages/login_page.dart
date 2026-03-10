@@ -5,11 +5,10 @@ import 'package:instagram_clone/features/auth/bloc/auth_service.dart';
 import 'package:instagram_clone/features/auth/bloc/login_cubit.dart';
 import 'package:instagram_clone/features/auth/bloc/login_state.dart';
 import 'package:instagram_clone/features/auth/pages/forget_password_screen.dart';
+import 'package:instagram_clone/features/auth/pages/register_page.dart';
 import 'package:instagram_clone/features/auth/widgets/app_text_field.dart';
 import 'package:instagram_clone/features/auth/widgets/primary_button.dart';
 import 'package:instagram_clone/features/splash/widgets/app_logo.dart';
-import 'package:instagram_clone/presentation/pages/create_account_screen.dart';
-import 'package:instagram_clone/presentation/pages/forget_password_screen.dart';
 import 'package:instagram_clone/presentation/pages/home_screen.dart';
 import 'package:instagram_clone/providers/theme_cubit.dart';
 
